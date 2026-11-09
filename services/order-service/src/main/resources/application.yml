@@ -1,0 +1,24 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: order-service
+  datasource:
+    # DEVELOPMENT-ONLY defaults for the local Docker Postgres.
+    # Override DB_URL / DB_USER / DB_PASSWORD via environment in any shared or real environment.
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/orderdb}
+    username: ${DB_USER:trustchain}
+    password: ${DB_PASSWORD:trustchain}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
